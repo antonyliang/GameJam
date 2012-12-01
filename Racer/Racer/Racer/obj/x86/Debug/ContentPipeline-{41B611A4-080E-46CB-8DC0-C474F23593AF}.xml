@@ -19,6 +19,15 @@
       <Output>C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\paddle.xnb</Output>
       <Time>2012-11-30T22:08:21.4602938-05:00</Time>
     </Item>
+    <Item>
+      <Source>startmenu.png</Source>
+      <Name>startmenu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\startmenu.xnb</Output>
+      <Time>2012-12-01T00:20:15.1109288-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{41B611A4-080E-46CB-8DC0-C474F23593AF}</ContentProjectGUID>

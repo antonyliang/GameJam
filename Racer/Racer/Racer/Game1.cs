@@ -20,6 +20,7 @@ namespace Racer
         SpriteBatch spriteBatch;
         Car Player;
         startMenu Menu;
+        Wall brick;
         Rectangle screenRectangle;
         Boolean start;
 
@@ -95,10 +96,13 @@ namespace Racer
                 Console.WriteLine(start);
                 Texture2D tempTexture = Content.Load<Texture2D>("ball");
                 Player = new Car(tempTexture, screenRectangle);
+                Texture2D tempWallTexture = Content.Load<Texture2D>("paddle");
+                brick = new Wall(tempWallTexture, screenRectangle);
             }
             if (start)
             {
                 Player.Update();
+                brick.Update();
             }
             
             base.Update(gameTime);
@@ -116,7 +120,7 @@ namespace Racer
             spriteBatch.Begin();
             
             Player.Draw(spriteBatch);
-             
+            brick.Draw(spriteBatch);
             Menu.Draw(spriteBatch);
             spriteBatch.End();
 
