@@ -179,7 +179,7 @@ namespace Racer
                 foreach (powerUp power in powers)
                 {
                     if (power.getStatus())
-                        power.Update();
+                        power.Update(random.Next(0,screenRectangle.Width));
                 }
 
                 if (Player.getShields() <= 0)
@@ -214,8 +214,8 @@ namespace Racer
         private void DrawText()
         {
             spriteBatch.DrawString(font, PlayerTime, new Vector2(10, 10), Color.White);
-            spriteBatch.DrawString(font, "Shield Left : " + Player.getShields() , new Vector2(700, 10), Color.White);
-            spriteBatch.DrawString(font, "Score : " + score, new Vector2(300, 10), Color.White);
+            spriteBatch.DrawString(font, "Shield Left : " + Player.getShields() , new Vector2(650, 10), Color.White);
+            spriteBatch.DrawString(font, "Score : " + score, new Vector2(350, 10), Color.White);
         }
 
         /// <summary>

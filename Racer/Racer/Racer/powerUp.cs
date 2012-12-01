@@ -24,7 +24,7 @@ namespace Racer
             this.texture = texture;
             this.screenBounds = screenBounds;
             this.hitPlayer = false;
-            Boolean active = false;
+            this.active = false;
             StartPosition(random);
         }
 
@@ -37,15 +37,14 @@ namespace Racer
             position.Y = 0 - randomNumber;
         }
 
-        public void Update()
+        public void Update(int randomNumber)
         {
             position.Y += speed;
 
             if (position.Y > screenBounds.Height)
             {
                 this.active = false;
-                position.Y = 0;
-                this.hitPlayer = true;
+                StartPosition(randomNumber);
             }
         }
 
