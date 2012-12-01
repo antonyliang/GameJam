@@ -10,6 +10,24 @@
       <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\ball.xnb</Output>
       <Time>2012-11-30T21:31:22.3091636-05:00</Time>
     </Item>
+    <Item>
+      <Source>paddle.png</Source>
+      <Name>paddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\paddle.xnb</Output>
+      <Time>2012-11-30T21:56:58.7463665-05:00</Time>
+    </Item>
+    <Item>
+      <Source>startMenu.png</Source>
+      <Name>startMenu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\startMenu.xnb</Output>
+      <Time>2012-11-30T23:20:10.3081043-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
