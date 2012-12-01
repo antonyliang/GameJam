@@ -10,6 +10,7 @@ namespace Racer
     class GG
     {
         Texture2D texture;
+        Vector2 position;
 
         Boolean lost;
 
@@ -17,6 +18,8 @@ namespace Racer
         {
             this.texture = texture;
             this.lost = false;
+            this.position.X = 0;
+            this.position.Y = 40;
         }
 
         public void setLost(Boolean lost)
@@ -32,11 +35,11 @@ namespace Racer
         {
             if (!lost)
             {
-                spriteBatch.Draw(texture, Vector2.Zero, Color.Transparent);
+                spriteBatch.Draw(texture, position, Color.Transparent);
             }
             else
             {
-                spriteBatch.Draw(texture, Vector2.Zero, Color.White);
+                spriteBatch.Draw(texture, position, Color.White);
             }
         }
 

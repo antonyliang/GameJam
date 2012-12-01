@@ -14,12 +14,14 @@ namespace Racer
         float speed = 3f;
         Texture2D texture;
         Rectangle screenBounds;
+        public Boolean hitPlayer;
         double rotation = Math.PI;
 
         public Wall(Texture2D texture, Rectangle screenBounds, int random)
         {
             this.texture = texture;
             this.screenBounds = screenBounds;
+            this.hitPlayer = false;
             StartPosition(random);
         }
 
@@ -106,8 +108,11 @@ namespace Racer
                     (int)(actualWidth + 1),
                     (int)(actualWidth + 1));
             }
-            if (missleLocation.Intersects(Car))
+            if (missleLocation.Intersects(Car) && (this.hitPlayer == false) )
                 return true;
+
+            if (this.position.Y == 0)
+                this.hitPlayer = false;
 
             return false;
         }
