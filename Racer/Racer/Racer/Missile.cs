@@ -12,24 +12,28 @@ namespace Racer
     {
         Vector2 position;
         float speed = 3f;
-        Texture2D texture;
+        Texture2D originalTexture;
+        Texture2D deathTexture;
+        Texture2D printTexture;
         Rectangle screenBounds;
         public Boolean hitPlayer;
         double rotation = 0;
 
-        public Missile(Texture2D texture, Rectangle screenBounds, int random)
+        public Missile(Texture2D texture, Texture2D deathTexture, Rectangle screenBounds, int random)
         {
-            this.texture = texture;
+            this.originalTexture = texture;
+            this.deathTexture = deathTexture;
             this.screenBounds = screenBounds;
             this.hitPlayer = false;
+            this.printTexture = this.originalTexture;
             StartPosition(random);
         }
 
         void StartPosition(int randomNumber)
         {
             rotation = 0;
-            if (randomNumber > screenBounds.Width - texture.Width)
-                position.X = screenBounds.Width - texture.Width;
+            if (randomNumber > screenBounds.Width - originalTexture.Width)
+                position.X = screenBounds.Width - originalTexture.Width;
             else
                 position.X = randomNumber;
             position.Y = 0 - randomNumber;
@@ -42,7 +46,7 @@ namespace Racer
 
         public Texture2D getTexture()
         {
-            return texture;
+            return originalTexture;
         }
 
         private int facePlayer(Vector2 playerPosition)
@@ -86,6 +90,7 @@ namespace Racer
             if (position.Y > screenBounds.Height)
             {
                 StartPosition(random);
+                this.printTexture = this.originalTexture;
                 if (speed < 6f)
                     speed += 1f;
             }
@@ -95,7 +100,7 @@ namespace Racer
         {
             if (position.Y > (screenBounds.Height / 2) + 170)
                 return false;
-            int actualWidth = (int)(texture.Width * position.Y / 384);
+            int actualWidth = (int)(originalTexture.Width * position.Y / 384);
             Rectangle missleLocation;
             if (rotation > 0)
             {
@@ -114,9 +119,12 @@ namespace Racer
                     (int)(actualWidth));
             }
 
-            
-            if (missleLocation.Intersects(Car) && (this.hitPlayer == false) )
+
+            if (missleLocation.Intersects(Car) && (this.hitPlayer == false))
+            {
+                this.printTexture = this.deathTexture;
                 return true;
+            }
 
             if (this.position.Y == 0)
                 this.hitPlayer = false;
@@ -128,10 +136,10 @@ namespace Racer
         {
             if (position.Y < (screenBounds.Height / 2) - 100)
             {
-                spriteBatch.Draw(texture, position, null, Color.White, (float)rotation, Vector2.Zero, position.Y / 192, SpriteEffects.None, 0);
+                spriteBatch.Draw(printTexture, position, null, Color.White, (float)rotation, Vector2.Zero, position.Y / 192, SpriteEffects.None, 0);
             }
             else
-                spriteBatch.Draw(texture, position, null, Color.White, 0, Vector2.Zero, position.Y / 192, SpriteEffects.None, 0);
+                spriteBatch.Draw(printTexture, position, null, Color.White, 0, Vector2.Zero, position.Y / 192, SpriteEffects.None, 0);
             
         }
         

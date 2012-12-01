@@ -41,7 +41,8 @@ namespace Racer
         Texture2D bgTexture;
         Texture2D menuTexture;
         Texture2D ggTexture;
-        Texture2D tempWallTexture;
+        Texture2D missileTexture;
+        Texture2D explosionTexture;
         Texture2D tempTexture;
         Texture2D redTexture;
         Texture2D greenTexture;
@@ -80,12 +81,12 @@ namespace Racer
             menuTexture = Content.Load<Texture2D>("startMenu");
             ggTexture = Content.Load<Texture2D>("ggscreen");
             font = Content.Load<SpriteFont>("myFont");
-            tempWallTexture = Content.Load<Texture2D>("missile");
+            missileTexture = Content.Load<Texture2D>("missile");
             tempTexture = Content.Load<Texture2D>("jet");
             redTexture = Content.Load<Texture2D>("red");
             greenTexture = Content.Load<Texture2D>("green");
             blueTexture = Content.Load<Texture2D>("blue");
-
+            explosionTexture = Content.Load<Texture2D>("explosion");
 
             GameStart();
 
@@ -99,7 +100,7 @@ namespace Racer
             missiles = new Missile[10];
             for (int i = 0; i < missiles.Length; i++)
             {
-                missiles[i] = new Missile(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+                missiles[i] = new Missile(missileTexture, explosionTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             }
 
 
