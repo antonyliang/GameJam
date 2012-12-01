@@ -45,9 +45,9 @@ namespace Racer
             keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.Left))
-                motion.X = -8f;
+                motion.X = -10f;
             if (keyboardState.IsKeyDown(Keys.Right))
-                motion.X = 8f;
+                motion.X = 10f;
 
             motion *= this.multiplier;
 

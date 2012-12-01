@@ -21,7 +21,7 @@ namespace Racer
         SpriteBatch spriteBatch;
         Car Player;
         startMenu Menu;
-        Wall brick; //brick2, brick3, brick4;
+        Wall[] bricks; //brick2, brick3, brick4;
         Rectangle screenRectangle;
         Boolean start;
         GG gameOver;
@@ -73,10 +73,14 @@ namespace Racer
             Texture2D ggTexture = Content.Load<Texture2D>("ggscreen");
             font = Content.Load<SpriteFont>("myFont");
 
-            Texture2D tempTexture = Content.Load<Texture2D>("ball");
+            Texture2D tempTexture = Content.Load<Texture2D>("ship");
             Player = new Car(tempTexture, screenRectangle);
             Texture2D tempWallTexture = Content.Load<Texture2D>("missle2");
-            brick = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+            bricks = new Wall[10];
+            for (int i = 0; i < bricks.Length; i++)
+            {
+                bricks[i] = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+            }
             /*
             Texture2D redTexture = Content.Load<Texture2D>("red");
             redPow = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
@@ -125,7 +129,10 @@ namespace Racer
             if (start)
             {
                 Player.Update();
-                brick.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
+                foreach (Wall brick in bricks)
+                {
+                    brick.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
+                }
                 //greenPow.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
                 /*brick2.Update(random.Next(0, screenRectangle.Width));
                 brick3.Update(random.Next(0, screenRectangle.Width));
@@ -133,16 +140,22 @@ namespace Racer
                 //draw gg
             }
             //     Collision(brick, Player);
-            if (brick.checkCollision(Player.getRectangle()))
+            foreach (Wall brick in bricks)
             {
-                Console.WriteLine("touche");
-                Player.takeDamage();
-                brick.hitPlayer = true;
+                if (brick.checkCollision(Player.getRectangle()))
+                {
+                    Console.WriteLine("touche");
+                    Player.takeDamage();
+                    brick.hitPlayer = true;
+                }
                 if (Player.getShields() <= 0)
                 {
                     //    gameOver.setLost(true);
                     //    lost = gameOver.getLost();
-                } /*
+                }
+            }
+                /*
+                       * 
                 if (redPow.checkCollision(Player.getRectangle()))
                 {
                     Console.WriteLine("redPOW");
@@ -167,7 +180,6 @@ namespace Racer
                 //Player.updateScore(gameTime.TotalGameTime);
                 //TimeSpan timePlaying = gameTime.TotalGameTime.Subtract(startScreen);
 
-            }
             if (!lost && start)
                 PlayerTime = "Time: " + timePlaying.ToString();
             base.Update(gameTime);
@@ -184,13 +196,16 @@ namespace Racer
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.SkyBlue);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             
             Player.Draw(spriteBatch);
-            brick.Draw(spriteBatch);
+            foreach (Wall brick in bricks)
+            {
+                brick.Draw(spriteBatch);
+            }
             /*(brick2.Draw(spriteBatch);
             brick3.Draw(spriteBatch);
             brick4.Draw(spriteBatch);

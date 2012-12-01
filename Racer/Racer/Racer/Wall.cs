@@ -15,7 +15,7 @@ namespace Racer
         Texture2D texture;
         Rectangle screenBounds;
         public Boolean hitPlayer;
-        double rotation = Math.PI;
+        double rotation = 0;
 
         public Wall(Texture2D texture, Rectangle screenBounds, int random)
         {
@@ -28,12 +28,12 @@ namespace Racer
         void StartPosition(int randomNumber)
         {
             Console.WriteLine(randomNumber);
-            rotation = Math.PI;
+            rotation = 0;
             if (randomNumber > screenBounds.Width - texture.Width)
                 position.X = screenBounds.Width - texture.Width;
             else
                 position.X = randomNumber;
-            position.Y = 0;
+            position.Y = 0 - randomNumber;
         }
 
         public Vector2 getPosition()
@@ -54,9 +54,9 @@ namespace Racer
             else
                 angle = Math.Atan((double)((position.Y - playerPosition.Y) / (playerPosition.X - position.X)));
 
-            if ( angle < rotation)
+            if (angle < rotation - 0.005 * playerPosition.Y / 192)
                 return 1;
-            if (angle > rotation)
+            if (angle > rotation + 0.005 * playerPosition.Y / 192)
                 return 1;
             return 0;
         }
@@ -64,50 +64,61 @@ namespace Racer
         public void Update(int random, Vector2 playerPosition)
         {   
             position.Y += speed;
-
-            if (facePlayer(playerPosition) == 1 && (playerPosition.X < position.X))
-                rotation += 0.005 * playerPosition.Y / 48;
-            else
-                rotation -= 0.005 * playerPosition.Y / 48;
-            if (playerPosition.X < position.X)
+            //(rotation > Math.PI * 1.5 || rotation < Math.PI / 2)
+            if (facePlayer(playerPosition) == 0 && position.Y < screenBounds.Height - 100 )
+            { }
+            else if (position.Y < (screenBounds.Height / 2) - 100)
             {
-                //rotation -= (0.01f * speed);
-                position.X -= speed;
+                if (facePlayer(playerPosition) == 1 && (playerPosition.X < position.X))
+                    rotation += 0.005 * playerPosition.Y / 192;
+                else
+                    rotation -= 0.005 * playerPosition.Y / 192;
             }
-            else
+            if (position.Y < (screenBounds.Height / 2) - 100)
             {
-                //rotation += 0.01f * speed;
-                position.X += speed;
+                if (playerPosition.X < position.X)
+                {
+                    //rotation -= (0.01f * speed);
+                    position.X -= speed;
+                }
+                else
+                {
+                    //rotation += 0.01f * speed;
+                    position.X += speed;
+                }
             }
-
-            if (position.Y > screenBounds.Height - 10)
+            if (position.Y > screenBounds.Height)
             {
                 StartPosition(random);
-                if(speed < 8f) 
+                if (speed < 6f)
                     speed += 1f;
             }
         }
 
         public bool checkCollision(Rectangle Car)
         {
-            int actualWidth = (int)(texture.Width * position.Y / 96);
+            if (position.Y > (screenBounds.Height / 2) + 170)
+                return false;
+            int actualWidth = (int)(texture.Width * position.Y / 384);
             Rectangle missleLocation;
-            if (rotation > 3.14)
+            if (rotation > 0)
             {
                 missleLocation = new Rectangle(
-                    (int)(position.X - actualWidth + 100),
-                    (int)(position.Y - actualWidth),
-                    (int)(actualWidth + 1),
-                    (int)(actualWidth + 1));
+                    (int)(position.X - actualWidth / ((double)position.Y / 192) + 40),
+                    (int)(position.Y - actualWidth / ((double)position.Y / 192)),
+                    (int)(actualWidth),
+                    (int)(actualWidth));
             }
             else
             {
                 missleLocation = new Rectangle(
-                    (int)(position.X - actualWidth),
-                    (int)(position.Y - actualWidth),
-                    (int)(actualWidth + 1),
-                    (int)(actualWidth + 1));
+                    (int)(position.X + actualWidth / ((double)position.Y / 192) - 40),
+                    (int)(position.Y - actualWidth / ((double)position.Y / 192)),
+                    (int)(actualWidth),
+                    (int)(actualWidth));
             }
+
+            
             if (missleLocation.Intersects(Car) && (this.hitPlayer == false) )
                 return true;
 
@@ -120,10 +131,13 @@ namespace Racer
         public void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(texture, position, Color.White); 480
-            if (position.Y / 96 < 5)
-                spriteBatch.Draw(texture, position, null, Color.White, (float)rotation, Vector2.Zero, position.Y / 96, SpriteEffects.None, 0);
+            if (position.Y < (screenBounds.Height / 2) - 100)
+            {
+                spriteBatch.Draw(texture, position, null, Color.White, (float)rotation, Vector2.Zero, position.Y / 192, SpriteEffects.None, 0);
+            }
             else
-                spriteBatch.Draw(texture, position, null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, position, null, Color.White, 0, Vector2.Zero, position.Y / 192, SpriteEffects.None, 0);
+            
         }
         
     }
