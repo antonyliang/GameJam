@@ -32,6 +32,23 @@ namespace Racer
                 position.X = randomNumber;
             position.Y = 50;
         }
+        /*
+        private void Collision(Vector2 playerPos)
+        {
+            if (this.position == playerPos)
+                Console.WriteLine("TOUCH");
+        }
+        */
+
+        public Vector2 getPosition()
+        {
+            return position;
+        }
+
+        public Texture2D getTexture()
+        {
+            return texture;
+        }
 
         public void Update()
         {

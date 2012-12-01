@@ -5,38 +5,42 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
 namespace Racer
 {
-    class startMenu
+    class GG
     {
         Vector2 position;
         Texture2D texture;
 
-        Boolean start;
+        Boolean lost;
 
-        public startMenu(Texture2D texture)
+        public GG(Texture2D texture, Boolean lost)
         {
             this.texture = texture;
-            this.start = false;
+            this.lost = false;
         }
 
-        public Boolean Update()
+        public void setLost(Boolean lost)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-
-            if (keyboardState.IsKeyDown(Keys.Enter))
-                start = true;
-            return start;
+            this.lost = lost;
+        }
+        public Boolean getLost()
+        {
+            return this.lost;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (!start)
+            if (!lost)
+            {
+                spriteBatch.Draw(texture, position, Color.Transparent);
+            }
+            else
             {
                 spriteBatch.Draw(texture, Vector2.Zero, Color.White);
             }
         }
+
+
     }
 }

@@ -62,6 +62,11 @@ namespace Racer
             return position;
         }
 
+        public Texture2D getTexture()
+        {
+            return texture;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
