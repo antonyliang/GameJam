@@ -13,7 +13,6 @@ namespace Racer
     {
         Vector2 position;
         Vector2 motion;
-        float paddleSpeed = 8f;
 
         Texture2D texture;
         Rectangle screenBounds;
@@ -41,11 +40,10 @@ namespace Racer
             keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.Left))
-                motion.X = -1;
+                motion.X = -8f;
             if (keyboardState.IsKeyDown(Keys.Right))
-                motion.X = 1;
+                motion.X = 8f;
 
-            motion.X *= paddleSpeed;
             position += motion;
             LockCar();            
         
@@ -57,6 +55,11 @@ namespace Racer
                 position.X = 0;
             if (position.X + texture.Width > screenBounds.Width)
                 position.X = screenBounds.Width - texture.Width;
+        }
+
+        public Vector2 getPosition()
+        {
+            return position;
         }
 
         public void Draw(SpriteBatch spriteBatch)
