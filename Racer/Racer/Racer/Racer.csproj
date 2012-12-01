@@ -75,14 +75,14 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
+    <Compile Include="Ship.cs" />
     <Compile Include="GG.cs" />
     <Compile Include="powerUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="startMenu.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="Missle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

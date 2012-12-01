@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Racer
 {
-    class Car
+    class Ship
     {
         Vector2 position;
         Vector2 motion;
@@ -23,11 +23,11 @@ namespace Racer
 
         int shields;
 
-        public Car(Texture2D texture, Rectangle screenBounds)
+        public Ship(Texture2D texture, Rectangle screenBounds)
         {
             this.texture = texture;
             this.screenBounds = screenBounds;
-            this.shields = 5000;
+            this.shields = 5;
             this.multiplier = 1;
 
             StartPosition();

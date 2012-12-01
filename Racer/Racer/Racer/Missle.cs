@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Racer
 {
-    class Wall
+    class Missle
     {
         Vector2 position;
         float speed = 3f;
@@ -17,7 +17,7 @@ namespace Racer
         public Boolean hitPlayer;
         double rotation = 0;
 
-        public Wall(Texture2D texture, Rectangle screenBounds, int random)
+        public Missle(Texture2D texture, Rectangle screenBounds, int random)
         {
             this.texture = texture;
             this.screenBounds = screenBounds;
@@ -63,7 +63,6 @@ namespace Racer
         public void Update(int random, Vector2 playerPosition)
         {   
             position.Y += speed;
-            //(rotation > Math.PI * 1.5 || rotation < Math.PI / 2)
             if (facePlayer(playerPosition) == 0 && position.Y < screenBounds.Height - 100 )
             { }
             else if (position.Y < (screenBounds.Height / 2) - 100)
@@ -77,12 +76,10 @@ namespace Racer
             {
                 if (playerPosition.X < position.X)
                 {
-                    //rotation -= (0.01f * speed);
                     position.X -= speed;
                 }
                 else
                 {
-                    //rotation += 0.01f * speed;
                     position.X += speed;
                 }
             }
@@ -129,7 +126,6 @@ namespace Racer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture, position, Color.White); 480
             if (position.Y < (screenBounds.Height / 2) - 100)
             {
                 spriteBatch.Draw(texture, position, null, Color.White, (float)rotation, Vector2.Zero, position.Y / 192, SpriteEffects.None, 0);

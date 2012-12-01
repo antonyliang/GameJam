@@ -19,13 +19,14 @@ namespace Racer
         Random random = new Random();
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Car Player;
+        Ship Player;
         startMenu Menu;
-        Wall[] bricks; //brick2, brick3, brick4;
+        Missle[] missles;
         Rectangle screenRectangle;
         Boolean start;
         GG gameOver;
         Boolean lost;
+        int score;
 
         powerUp[] powers;
         const int redPow = 0;
@@ -44,8 +45,6 @@ namespace Racer
             screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             start = false;
             lost = false;
-            Console.WriteLine("Game1() ran");
-            Console.WriteLine(graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -70,18 +69,17 @@ namespace Racer
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
             Texture2D menuTexture = Content.Load<Texture2D>("startMenu");
             Texture2D ggTexture = Content.Load<Texture2D>("ggscreen");
             font = Content.Load<SpriteFont>("myFont");
 
             Texture2D tempTexture = Content.Load<Texture2D>("ship");
-            Player = new Car(tempTexture, screenRectangle);
-            Texture2D tempWallTexture = Content.Load<Texture2D>("missle2");
-            bricks = new Wall[10];
-            for (int i = 0; i < bricks.Length; i++)
+            Player = new Ship(tempTexture, screenRectangle);
+            Texture2D tempWallTexture = Content.Load<Texture2D>("missle");
+            missles = new Missle[10];
+            for (int i = 0; i < missles.Length; i++)
             {
-                bricks[i] = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+                missles[i] = new Missle(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             }
             
             Texture2D redTexture = Content.Load<Texture2D>("red");
@@ -91,7 +89,9 @@ namespace Racer
             powers[redPow] = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             powers[greenPow] = new powerUp(greenTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             powers[bluePow] = new powerUp(blueTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-            
+
+            score = 0;
+
             Menu = new startMenu(menuTexture);
             gameOver = new GG(ggTexture, lost);
 
@@ -118,16 +118,11 @@ namespace Racer
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            // TODO: Add your update logic here
 
             if (!start)
             {
                 start = Menu.Update();
                 startScreen = gameTime.TotalGameTime;
-                //Console.WriteLine(start);
-                /*     brick2 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-                     brick3 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-                     brick4 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width)); */
             }
             else
             {
@@ -137,9 +132,9 @@ namespace Racer
                 {
                     Player.disableGreen();
                 }
-                foreach (Wall brick in bricks)
+                foreach (Missle rocket in missles)
                 {
-                    brick.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
+                    rocket.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
                 }
                 if (random.Next(0, 101) == 4)
                 {
@@ -147,55 +142,44 @@ namespace Racer
                     if (!powers[i].getStatus())
                         powers[i].setActive();
                 }
-                //greenPow.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
-                /*brick2.Update(random.Next(0, screenRectangle.Width));
-                brick3.Update(random.Next(0, screenRectangle.Width));
-                brick4.Update(random.Next(0, screenRectangle.Width));*/
-                //draw gg
 
-
-                //     Collision(brick, Player);
-                foreach (Wall brick in bricks)
+                foreach (Missle rocket in missles)
                 {
-                    if (brick.checkCollision(Player.getRectangle()))
+                    if (rocket.checkCollision(Player.getRectangle()))
                     {
-                        Console.WriteLine("touche");
                         Player.takeDamage();
-                        brick.hitPlayer = true;
+                        rocket.hitPlayer = true;
                     }
                 }
+
                 foreach (powerUp power in powers)
                 {
                     if (power.getStatus())
                         power.Update();
                 }
+
                 if (Player.getShields() <= 0)
                 {
                     gameOver.setLost(true);
                     lost = gameOver.getLost();
-
+                    score += (int)timePlaying.TotalSeconds;
                 }
                 if (powers[redPow].checkCollision(Player.getRectangle()))
                 {
-                    //Console.WriteLine("redPOW");
                     Player.redBuff();
                     powers[redPow].hitPlayer = true;
-                    Console.WriteLine(Player.getShields());
                 }
-                if (powers[greenPow].checkCollision(Player.getRectangle()))//is permanent for now
+                if (powers[greenPow].checkCollision(Player.getRectangle()))
                 {
-                    //Console.WriteLine("greenPOW");
                     Player.greenBuff();//what to set multiplier to
                     ts = TimeSpan.FromSeconds(2.0);
                     ts = ts.Add(timePlaying);
                     powers[greenPow].hitPlayer = true;
-                    //Console.WriteLine("You got a green power up");
                 }
                 if (powers[bluePow].checkCollision(Player.getRectangle()))
                 {
-                    //Console.WriteLine("bluePOW");
+                    score += 100;
                     powers[bluePow].hitPlayer = true;
-                    //Console.WriteLine("You got a blue power up");
                 }
 
                 if (!lost && start)
@@ -207,6 +191,7 @@ namespace Racer
         {
             spriteBatch.DrawString(font, PlayerTime, new Vector2(10, 10), Color.White);
             spriteBatch.DrawString(font, "Shield Left : " + Player.getShields() , new Vector2(700, 10), Color.White);
+            spriteBatch.DrawString(font, "Score : " + score, new Vector2(300, 10), Color.White);
         }
 
         /// <summary>
@@ -220,13 +205,12 @@ namespace Racer
             else
                 GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
             
             Player.Draw(spriteBatch);
-            foreach (Wall brick in bricks)
+            foreach (Missle rocket in missles)
             {
-                brick.Draw(spriteBatch);
+                rocket.Draw(spriteBatch);
             }
             foreach (powerUp power in powers)
             {
