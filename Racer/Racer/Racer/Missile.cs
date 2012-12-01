@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Racer
 {
-    class Missle
+    class Missile
     {
         Vector2 position;
         float speed = 3f;
@@ -17,7 +17,7 @@ namespace Racer
         public Boolean hitPlayer;
         double rotation = 0;
 
-        public Missle(Texture2D texture, Rectangle screenBounds, int random)
+        public Missile(Texture2D texture, Rectangle screenBounds, int random)
         {
             this.texture = texture;
             this.screenBounds = screenBounds;

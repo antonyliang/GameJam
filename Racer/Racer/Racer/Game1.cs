@@ -21,7 +21,7 @@ namespace Racer
         SpriteBatch spriteBatch;
         Ship Player;
         startMenu Menu;
-        Missle[] missles;
+        Missile[] missiles;
         Rectangle screenRectangle;
         Boolean start;
         GG gameOver;
@@ -75,11 +75,11 @@ namespace Racer
 
             Texture2D tempTexture = Content.Load<Texture2D>("ship");
             Player = new Ship(tempTexture, screenRectangle);
-            Texture2D tempWallTexture = Content.Load<Texture2D>("missle");
-            missles = new Missle[10];
-            for (int i = 0; i < missles.Length; i++)
+            Texture2D tempWallTexture = Content.Load<Texture2D>("missile");
+            missiles = new Missile[10];
+            for (int i = 0; i < missiles.Length; i++)
             {
-                missles[i] = new Missle(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+                missiles[i] = new Missile(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             }
             
             Texture2D redTexture = Content.Load<Texture2D>("red");
@@ -132,7 +132,7 @@ namespace Racer
                 {
                     Player.disableGreen();
                 }
-                foreach (Missle rocket in missles)
+                foreach (Missile rocket in missiles)
                 {
                     rocket.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
                 }
@@ -143,7 +143,7 @@ namespace Racer
                         powers[i].setActive();
                 }
 
-                foreach (Missle rocket in missles)
+                foreach (Missile rocket in missiles)
                 {
                     if (rocket.checkCollision(Player.getRectangle()))
                     {
@@ -208,7 +208,7 @@ namespace Racer
             spriteBatch.Begin();
             
             Player.Draw(spriteBatch);
-            foreach (Missle rocket in missles)
+            foreach (Missile rocket in missiles)
             {
                 rocket.Draw(spriteBatch);
             }

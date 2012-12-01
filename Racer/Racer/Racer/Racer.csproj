@@ -82,7 +82,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="startMenu.cs" />
-    <Compile Include="Missle.cs" />
+    <Compile Include="Missile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
