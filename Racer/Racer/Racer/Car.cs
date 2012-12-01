@@ -67,6 +67,16 @@ namespace Racer
             return texture;
         }
 
+        public Rectangle getRectangle()
+        {
+            Rectangle ballLocation = new Rectangle(
+                (int)position.X,
+                (int)position.Y,
+                texture.Width,
+                texture.Height);
+            return ballLocation;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);

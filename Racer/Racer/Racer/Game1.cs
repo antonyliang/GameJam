@@ -105,11 +105,16 @@ namespace Racer
                 brick.Update();
                 //draw gg
             }
-            Collision(brick, Player);
-            
+       //     Collision(brick, Player);
+            if(brick.checkCollision(Player.getRectangle()))
+            {
+                Console.WriteLine("touche");
+                gameOver.setLost(true);
+                lost = gameOver.getLost();
+            }
             base.Update(gameTime);
         }
-
+        /*
         private void Collision(Wall brick, Car Player)
         {
             Vector2 brickVec = brick.getPosition();
@@ -118,7 +123,7 @@ namespace Racer
             //Texture2D playerTexture = Player.getTexture();
             //brickvec.x <= playervec.x <= brickvec.x+bricktexture.width
             //bickvec.y+bricktexture.height <= playervec.y <= brickvec.y
-            /*
+            
             if ((brickVec.X <= playerVec.X) && (playerVec.X <= brickVec.X + brickTexture.Width) && (brickVec.Y + brickTexture.Height >= playerVec.Y))
             {
                 //puts the color of each pixel of the brick texture into an array
@@ -135,7 +140,7 @@ namespace Racer
 
             //Console.WriteLine("touche");
             }
-            */
+            
             if ((brickVec.X <= playerVec.X) && (playerVec.X <= brickVec.X + brickTexture.Width) && (brickVec.Y + brickTexture.Height >= playerVec.Y))
             {
                 Console.WriteLine("touche");
@@ -143,7 +148,7 @@ namespace Racer
                 lost = gameOver.getLost();
             }
         }
-
+*/
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>

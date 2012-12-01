@@ -32,13 +32,6 @@ namespace Racer
                 position.X = randomNumber;
             position.Y = 50;
         }
-        /*
-        private void Collision(Vector2 playerPos)
-        {
-            if (this.position == playerPos)
-                Console.WriteLine("TOUCH");
-        }
-        */
 
         public Vector2 getPosition()
         {
@@ -61,13 +54,27 @@ namespace Racer
             }
         }
 
+        public bool checkCollision(Rectangle Car)
+        {
+            Rectangle missleLocation = new Rectangle(
+                (int)position.X,
+                (int)position.Y,
+                texture.Width,
+                texture.Height);
+
+            if (missleLocation.Intersects(Car))
+                return true;
+
+            return false;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(texture, position, Color.White); 480
             //spriteBatch.Draw(texture, position, Color.White);
-            if (position.Y / 48 > 1)
+           /* if (position.Y / 48 > 1)
                 spriteBatch.Draw(texture, position, null, Color.White, 1, Vector2.Zero, position.Y / 48, SpriteEffects.None, 0);
-            else
+            else */
                 spriteBatch.Draw(texture, position, Color.White);
         }
         
