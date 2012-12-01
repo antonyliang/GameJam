@@ -1,9 +1,0 @@
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.csprojResolveAssemblyReference.cache
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\ball.xnb
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\paddle.xnb
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\startmenu.xnb
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Racer.exe
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Racer.pdb
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.exe
-C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.pdb
