@@ -28,10 +28,10 @@ namespace Racer
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
             screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             start = false;
             Console.WriteLine("Game1() ran");
+            Console.WriteLine(graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -57,14 +57,9 @@ namespace Racer
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            Texture2D tempTexture = Content.Load<Texture2D>("ball");
-            Texture2D tempWallTexture = Content.Load<Texture2D>("paddle");
             Texture2D menuTexture = Content.Load<Texture2D>("startMenu");
 
             Menu = new startMenu(menuTexture);
-
-            Player = new Car(tempTexture, screenRectangle);
-            
 
         }
 
@@ -96,7 +91,7 @@ namespace Racer
                 Console.WriteLine(start);
                 Texture2D tempTexture = Content.Load<Texture2D>("ball");
                 Player = new Car(tempTexture, screenRectangle);
-                Texture2D tempWallTexture = Content.Load<Texture2D>("paddle");
+                Texture2D tempWallTexture = Content.Load<Texture2D>("ball");
                 brick = new Wall(tempWallTexture, screenRectangle);
             }
             if (start)

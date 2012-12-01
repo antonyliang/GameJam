@@ -30,13 +30,13 @@ namespace Racer
                 position.X = screenBounds.Width - texture.Width;
             else
                 position.X = randomNumber;
-            position.Y = 20;
+            position.Y = 50;
         }
 
         public void Update()
         {
             position.Y += speed;
-            if (position.Y > screenBounds.Height)
+            if (position.Y > screenBounds.Height - 10)
             {
                 StartPosition();
                 if(speed < 16f) 
@@ -46,7 +46,12 @@ namespace Racer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            //spriteBatch.Draw(texture, position, Color.White); 480
+            //spriteBatch.Draw(texture, position, Color.White);
+            if (position.Y / 48 > 1)
+                spriteBatch.Draw(texture, position, null, Color.White, 1, Vector2.Zero, position.Y / 48, SpriteEffects.None, 0);
+            else
+                spriteBatch.Draw(texture, position, Color.White);
         }
         
     }
