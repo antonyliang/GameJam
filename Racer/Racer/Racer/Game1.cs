@@ -20,7 +20,7 @@ namespace Racer
         SpriteBatch spriteBatch;
         Car Player;
         startMenu Menu;
-        Wall brick;
+        Wall brick; //brick2, brick3, brick4;
         Rectangle screenRectangle;
         Boolean start;
         GG gameOver;
@@ -88,6 +88,7 @@ namespace Racer
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            Random random = new Random();
             // TODO: Add your update logic here
 
             if (!start)
@@ -96,13 +97,19 @@ namespace Racer
                 //Console.WriteLine(start);
                 Texture2D tempTexture = Content.Load<Texture2D>("ball");
                 Player = new Car(tempTexture, screenRectangle);
-                Texture2D tempWallTexture = Content.Load<Texture2D>("ball");
-                brick = new Wall(tempWallTexture, screenRectangle);
+                Texture2D tempWallTexture = Content.Load<Texture2D>("missle2");
+                brick = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+           /*     brick2 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+                brick3 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+                brick4 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width)); */
             }
             if (start)
             {
                 Player.Update();
-                brick.Update();
+                brick.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
+                /*brick2.Update(random.Next(0, screenRectangle.Width));
+                brick3.Update(random.Next(0, screenRectangle.Width));
+                brick4.Update(random.Next(0, screenRectangle.Width));*/
                 //draw gg
             }
        //     Collision(brick, Player);
@@ -114,41 +121,6 @@ namespace Racer
             }
             base.Update(gameTime);
         }
-        /*
-        private void Collision(Wall brick, Car Player)
-        {
-            Vector2 brickVec = brick.getPosition();
-            Vector2 playerVec = Player.getPosition();
-            Texture2D brickTexture = brick.getTexture();
-            //Texture2D playerTexture = Player.getTexture();
-            //brickvec.x <= playervec.x <= brickvec.x+bricktexture.width
-            //bickvec.y+bricktexture.height <= playervec.y <= brickvec.y
-            
-            if ((brickVec.X <= playerVec.X) && (playerVec.X <= brickVec.X + brickTexture.Width) && (brickVec.Y + brickTexture.Height >= playerVec.Y))
-            {
-                //puts the color of each pixel of the brick texture into an array
-                Color[] pixelColors = new Color[brickTexture.Width * brickTexture.Height];
-                brickTexture.GetData<Color>(pixelColors);
-                for (int i = 0; i < pixelColors.Length; i++)
-                {
-                    if ((pixelColors[i].R == 0) && (pixelColors[i].G == 0) && (pixelColors[i].B == 0))
-                    {
-                        Console.WriteLine("touche");
-                    }
-                }
-
-
-            //Console.WriteLine("touche");
-            }
-            
-            if ((brickVec.X <= playerVec.X) && (playerVec.X <= brickVec.X + brickTexture.Width) && (brickVec.Y + brickTexture.Height >= playerVec.Y))
-            {
-                Console.WriteLine("touche");
-                gameOver.setLost(true);
-                lost = gameOver.getLost();
-            }
-        }
-*/
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -162,6 +134,9 @@ namespace Racer
             
             Player.Draw(spriteBatch);
             brick.Draw(spriteBatch);
+            /*(brick2.Draw(spriteBatch);
+            brick3.Draw(spriteBatch);
+            brick4.Draw(spriteBatch);*/
             Menu.Draw(spriteBatch);
             gameOver.Draw(spriteBatch);
             spriteBatch.End();
