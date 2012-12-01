@@ -5,6 +5,8 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
 namespace Racer
 {
     class GG
@@ -29,6 +31,14 @@ namespace Racer
         public Boolean getLost()
         {
             return this.lost;
+        }
+
+        public void Update()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            if (keyboardState.IsKeyDown(Keys.Enter))
+                lost = false;
         }
 
         public void Draw(SpriteBatch spriteBatch)

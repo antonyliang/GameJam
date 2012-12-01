@@ -27,7 +27,7 @@ namespace Racer
         {
             this.texture = texture;
             this.screenBounds = screenBounds;
-            this.shields = 5;
+            this.shields = 10;
             this.multiplier = 1;
 
             StartPosition();
@@ -78,7 +78,7 @@ namespace Racer
 
         public void redBuff()
         {
-            this.shields += 2;
+            this.shields += 3;
         }
 
         public void disableGreen()

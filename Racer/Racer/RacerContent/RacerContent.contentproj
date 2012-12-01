@@ -30,13 +30,6 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="paddle.png">
-      <Name>paddle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="startmenu.png">
       <Name>startmenu</Name>
       <Importer>TextureImporter</Importer>
@@ -75,8 +68,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ship.png">
-      <Name>ship</Name>
+    <Compile Include="jet.png">
+      <Name>jet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -84,6 +77,13 @@
   <ItemGroup>
     <Compile Include="missile.png">
       <Name>missile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bluesky.png">
+      <Name>bluesky</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

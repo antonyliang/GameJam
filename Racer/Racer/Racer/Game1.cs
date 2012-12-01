@@ -38,12 +38,20 @@ namespace Racer
         TimeSpan startScreen;
         TimeSpan ts;
 
+        Texture2D bgTexture;
+        Texture2D menuTexture;
+        Texture2D ggTexture;
+        Texture2D tempWallTexture;
+        Texture2D tempTexture;
+        Texture2D redTexture;
+        Texture2D greenTexture;
+        Texture2D blueTexture;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-            start = false;
             lost = false;
         }
 
@@ -68,23 +76,33 @@ namespace Racer
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Texture2D menuTexture = Content.Load<Texture2D>("startMenu");
-            Texture2D ggTexture = Content.Load<Texture2D>("ggscreen");
+            bgTexture = Content.Load<Texture2D>("bluesky");
+            menuTexture = Content.Load<Texture2D>("startMenu");
+            ggTexture = Content.Load<Texture2D>("ggscreen");
             font = Content.Load<SpriteFont>("myFont");
+            tempWallTexture = Content.Load<Texture2D>("missile");
+            tempTexture = Content.Load<Texture2D>("jet");
+            redTexture = Content.Load<Texture2D>("red");
+            greenTexture = Content.Load<Texture2D>("green");
+            blueTexture = Content.Load<Texture2D>("blue");
 
-            Texture2D tempTexture = Content.Load<Texture2D>("ship");
+
+            GameStart();
+
+        }
+
+        private void GameStart() 
+        {
+
             Player = new Ship(tempTexture, screenRectangle);
-            Texture2D tempWallTexture = Content.Load<Texture2D>("missile");
+
             missiles = new Missile[10];
             for (int i = 0; i < missiles.Length; i++)
             {
                 missiles[i] = new Missile(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             }
-            
-            Texture2D redTexture = Content.Load<Texture2D>("red");
-            Texture2D greenTexture = Content.Load<Texture2D>("green");
-            Texture2D blueTexture = Content.Load<Texture2D>("blue");
+
+
             powers = new powerUp[3];
             powers[redPow] = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             powers[greenPow] = new powerUp(greenTexture, screenRectangle, random.Next(0, screenRectangle.Width));
@@ -94,7 +112,7 @@ namespace Racer
 
             Menu = new startMenu(menuTexture);
             gameOver = new GG(ggTexture, lost);
-
+            start = false;
         }
 
         /// <summary>
@@ -114,7 +132,13 @@ namespace Racer
         protected override void Update(GameTime gameTime)
         {
             if (lost)
+            {
+                gameOver.Update();
+                lost = gameOver.getLost();
+                if (!lost)
+                    GameStart();
                 return;
+            }
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -206,7 +230,9 @@ namespace Racer
                 GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            
+            if (!lost)
+                spriteBatch.Draw(bgTexture, new Vector2(0, 0), Color.White);
+
             Player.Draw(spriteBatch);
             foreach (Missile rocket in missiles)
             {
