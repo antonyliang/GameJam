@@ -27,7 +27,6 @@ namespace Racer
 
         void StartPosition(int randomNumber)
         {
-            Console.WriteLine(randomNumber);
             rotation = 0;
             if (randomNumber > screenBounds.Width - texture.Width)
                 position.X = screenBounds.Width - texture.Width;

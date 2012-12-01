@@ -27,7 +27,7 @@ namespace Racer
         {
             this.texture = texture;
             this.screenBounds = screenBounds;
-            this.shields = 1;
+            this.shields = 5000;
             this.multiplier = 1;
 
             StartPosition();
@@ -76,19 +76,19 @@ namespace Racer
             return this.shields;
         }
 
-        public void addShields()
+        public void redBuff()
         {
-            this.shields++;
+            this.shields += 2;
         }
 
-        public float getMultiplier()
+        public void disableGreen()
         {
-            return this.multiplier;
+            this.multiplier = 1;
         }
 
-        public void buffMultiplier(float m)
+        public void greenBuff()
         {
-            this.multiplier *= m;
+            this.multiplier *= 2;
         }
 
         public Vector2 getPosition()

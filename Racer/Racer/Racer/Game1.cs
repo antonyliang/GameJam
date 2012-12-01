@@ -26,11 +26,11 @@ namespace Racer
         Boolean start;
         GG gameOver;
         Boolean lost;
-        Boolean gotGreen;
-        
-        powerUp redPow;
-        powerUp greenPow;
-        powerUp bluePow;
+
+        powerUp[] powers;
+        const int redPow = 0;
+        const int greenPow = 1;
+        const int bluePow = 2;
         
         SpriteFont font;
         string PlayerTime = "Time: ";
@@ -87,9 +87,10 @@ namespace Racer
             Texture2D redTexture = Content.Load<Texture2D>("red");
             Texture2D greenTexture = Content.Load<Texture2D>("green");
             Texture2D blueTexture = Content.Load<Texture2D>("blue");
-            redPow = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-            greenPow = new powerUp(greenTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-            bluePow = new powerUp(blueTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+            powers = new powerUp[3];
+            powers[redPow] = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+            powers[greenPow] = new powerUp(greenTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+            powers[bluePow] = new powerUp(blueTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             
             Menu = new startMenu(menuTexture);
             gameOver = new GG(ggTexture, lost);
@@ -112,6 +113,8 @@ namespace Racer
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (lost)
+                return;
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -126,70 +129,84 @@ namespace Racer
                      brick3 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
                      brick4 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width)); */
             }
-
-            TimeSpan timePlaying = gameTime.TotalGameTime.Subtract(startScreen);
-            if (start)
+            else
             {
+                TimeSpan timePlaying = gameTime.TotalGameTime.Subtract(startScreen);
                 Player.Update();
+                if (ts.CompareTo(timePlaying) < 1)
+                {
+                    Player.disableGreen();
+                }
                 foreach (Wall brick in bricks)
                 {
                     brick.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
+                }
+                if (random.Next(0, 101) == 4)
+                {
+                    int i = random.Next(0, 3);
+                    if (!powers[i].getStatus())
+                        powers[i].setActive();
                 }
                 //greenPow.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
                 /*brick2.Update(random.Next(0, screenRectangle.Width));
                 brick3.Update(random.Next(0, screenRectangle.Width));
                 brick4.Update(random.Next(0, screenRectangle.Width));*/
                 //draw gg
-            }
-            //     Collision(brick, Player);
-            foreach (Wall brick in bricks)
-            {
-                if (brick.checkCollision(Player.getRectangle()))
+
+
+                //     Collision(brick, Player);
+                foreach (Wall brick in bricks)
                 {
-                    Console.WriteLine("touche");
-                    Player.takeDamage();
-                    brick.hitPlayer = true;
+                    if (brick.checkCollision(Player.getRectangle()))
+                    {
+                        Console.WriteLine("touche");
+                        Player.takeDamage();
+                        brick.hitPlayer = true;
+                    }
                 }
-            }
+                foreach (powerUp power in powers)
+                {
+                    if (power.getStatus())
+                        power.Update();
+                }
                 if (Player.getShields() <= 0)
                 {
-                //    gameOver.setLost(true);
-                //    lost = gameOver.getLost();
+                    gameOver.setLost(true);
+                    lost = gameOver.getLost();
+
                 }
-                if (redPow.checkCollision(Player.getRectangle()))
+                if (powers[redPow].checkCollision(Player.getRectangle()))
                 {
-                    Console.WriteLine("redPOW");
-                    Player.addShields();
-                    redPow.hitPlayer = true;
+                    //Console.WriteLine("redPOW");
+                    Player.redBuff();
+                    powers[redPow].hitPlayer = true;
                     Console.WriteLine(Player.getShields());
                 }
-                if (greenPow.checkCollision(Player.getRectangle()))//is permanent for now
+                if (powers[greenPow].checkCollision(Player.getRectangle()))//is permanent for now
                 {
                     //Console.WriteLine("greenPOW");
-                    Player.buffMultiplier(2);//what to set multiplier to
-                    greenPow.hitPlayer = true;
-                    this.gotGreen = true;
-                    ts = TimeSpan.FromSeconds(2.0);//how long buff lasts
-                    Player.setBuffEnd(timePlaying.Add(ts));
-                    Console.WriteLine("You got a green power up");
+                    Player.greenBuff();//what to set multiplier to
+                    ts = TimeSpan.FromSeconds(2.0);
+                    ts = ts.Add(timePlaying);
+                    powers[greenPow].hitPlayer = true;
+                    //Console.WriteLine("You got a green power up");
                 }
-                if (bluePow.checkCollision(Player.getRectangle()))
+                if (powers[bluePow].checkCollision(Player.getRectangle()))
                 {
-                    Console.WriteLine("bluePOW");
-                    bluePow.hitPlayer = true;
-                    Console.WriteLine("You got a blue power up");
-                } 
-                //Player.updateScore(gameTime.TotalGameTime);
-                //TimeSpan timePlaying = gameTime.TotalGameTime.Subtract(startScreen);
+                    //Console.WriteLine("bluePOW");
+                    powers[bluePow].hitPlayer = true;
+                    //Console.WriteLine("You got a blue power up");
+                }
 
-            if (!lost && start)
-                PlayerTime = "Time: " + timePlaying.ToString();
-            base.Update(gameTime);
+                if (!lost && start)
+                    PlayerTime = "Time: " + timePlaying.ToString();
+                base.Update(gameTime);
+            }
         }
-
         private void DrawText()
         {
             spriteBatch.DrawString(font, PlayerTime, new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(font, "Shield Left : " + Player.getShields() , new Vector2(700, 10), Color.White);
         }
 
         /// <summary>
@@ -198,7 +215,10 @@ namespace Racer
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.SkyBlue);
+            if (!lost) 
+                GraphicsDevice.Clear(Color.SkyBlue);
+            else
+                GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
@@ -208,13 +228,10 @@ namespace Racer
             {
                 brick.Draw(spriteBatch);
             }
-            /*(brick2.Draw(spriteBatch);
-            brick3.Draw(spriteBatch);
-            brick4.Draw(spriteBatch);
-             redPow.Draw(spriteBatch);
-            bluePow.Draw(spriteBatch);
-             */
-            //greenPow.Draw(spriteBatch);
+            foreach (powerUp power in powers)
+            {
+                power.Draw(spriteBatch);
+            }
             Menu.Draw(spriteBatch);
             gameOver.Draw(spriteBatch);
             DrawText();
