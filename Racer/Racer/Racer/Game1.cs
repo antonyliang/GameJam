@@ -26,10 +26,11 @@ namespace Racer
         Boolean start;
         GG gameOver;
         Boolean lost;
+        
         powerUp redPow;
         powerUp greenPow;
         powerUp bluePow;
-
+        
         SpriteFont font;
         string PlayerTime = "Time: ";
         TimeSpan startScreen;
@@ -76,14 +77,14 @@ namespace Racer
             Player = new Car(tempTexture, screenRectangle);
             Texture2D tempWallTexture = Content.Load<Texture2D>("missle2");
             brick = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-
+            /*
             Texture2D redTexture = Content.Load<Texture2D>("red");
             redPow = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             Texture2D greenTexture = Content.Load<Texture2D>("green");
             greenPow = new powerUp(greenTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             Texture2D blueTexture = Content.Load<Texture2D>("blue");
             bluePow = new powerUp(blueTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-
+            */
             Menu = new startMenu(menuTexture);
             gameOver = new GG(ggTexture, lost);
 
@@ -115,9 +116,9 @@ namespace Racer
                 start = Menu.Update();
                 startScreen = gameTime.TotalGameTime;
                 //Console.WriteLine(start);
-           /*     brick2 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-                brick3 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-                brick4 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width)); */
+                /*     brick2 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+                     brick3 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+                     brick4 = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width)); */
             }
 
             TimeSpan timePlaying = gameTime.TotalGameTime.Subtract(startScreen);
@@ -125,23 +126,23 @@ namespace Racer
             {
                 Player.Update();
                 brick.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
-                greenPow.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
+                //greenPow.Update(random.Next(0, screenRectangle.Width), Player.getPosition());
                 /*brick2.Update(random.Next(0, screenRectangle.Width));
                 brick3.Update(random.Next(0, screenRectangle.Width));
                 brick4.Update(random.Next(0, screenRectangle.Width));*/
                 //draw gg
             }
-       //     Collision(brick, Player);
-            if(brick.checkCollision(Player.getRectangle()))
+            //     Collision(brick, Player);
+            if (brick.checkCollision(Player.getRectangle()))
             {
                 Console.WriteLine("touche");
                 Player.takeDamage();
                 brick.hitPlayer = true;
                 if (Player.getShields() <= 0)
                 {
-                //    gameOver.setLost(true);
-                //    lost = gameOver.getLost();
-                }
+                    //    gameOver.setLost(true);
+                    //    lost = gameOver.getLost();
+                } /*
                 if (redPow.checkCollision(Player.getRectangle()))
                 {
                     Console.WriteLine("redPOW");
@@ -162,14 +163,13 @@ namespace Racer
                     Console.WriteLine("bluePOW");
                     bluePow.hitPlayer = true;
                     Console.WriteLine("You got a blue power up");
-                }
+                } */
                 //Player.updateScore(gameTime.TotalGameTime);
                 //TimeSpan timePlaying = gameTime.TotalGameTime.Subtract(startScreen);
-                if (!lost && start)
-                    PlayerTime = "Time: " + timePlaying.ToString();
-                base.Update(gameTime);
-            }
 
+            }
+            if (!lost && start)
+                PlayerTime = "Time: " + timePlaying.ToString();
             base.Update(gameTime);
         }
 
@@ -197,7 +197,7 @@ namespace Racer
              redPow.Draw(spriteBatch);
             bluePow.Draw(spriteBatch);
              */
-            greenPow.Draw(spriteBatch);
+            //greenPow.Draw(spriteBatch);
             Menu.Draw(spriteBatch);
             gameOver.Draw(spriteBatch);
             DrawText();

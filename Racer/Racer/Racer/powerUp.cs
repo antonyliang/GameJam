@@ -24,15 +24,15 @@ namespace Racer
             this.screenBounds = screenBounds;
         }
 
-        public void Update()
+        /*public void Update()
         {
             position.Y += speed;
             if (position.Y > screenBounds.Height - 10)
             {
-                StartPosition();
+                StartPosition(random);
                 if (speed < 16f)
                     speed += 0.5f;
             }
-        }
+        }*/
     }
 }
