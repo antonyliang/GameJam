@@ -9,7 +9,6 @@ namespace Racer
 {
     class GG
     {
-        Vector2 position;
         Texture2D texture;
 
         Boolean lost;
@@ -33,7 +32,7 @@ namespace Racer
         {
             if (!lost)
             {
-                spriteBatch.Draw(texture, position, Color.Transparent);
+                spriteBatch.Draw(texture, Vector2.Zero, Color.Transparent);
             }
             else
             {

@@ -11,7 +11,6 @@ namespace Racer
 {
     class startMenu
     {
-        Vector2 position;
         Texture2D texture;
 
         Boolean start;

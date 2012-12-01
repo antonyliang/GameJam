@@ -109,8 +109,8 @@ namespace Racer
             if(brick.checkCollision(Player.getRectangle()))
             {
                 Console.WriteLine("touche");
-                gameOver.setLost(true);
-                lost = gameOver.getLost();
+                //gameOver.setLost(true);
+                //lost = gameOver.getLost();
             }
             base.Update(gameTime);
         }

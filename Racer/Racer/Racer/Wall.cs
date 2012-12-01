@@ -11,7 +11,7 @@ namespace Racer
     class Wall
     {
         Vector2 position;
-        float speed = 1f;
+        float speed = 3f;
         Texture2D texture;
         Rectangle screenBounds;
 
@@ -49,19 +49,21 @@ namespace Racer
             if (position.Y > screenBounds.Height - 10)
             {
                 StartPosition();
-                if(speed < 16f) 
-                    speed += 0.5f;
+              //  if(speed < 16f) 
+              //      speed += 0.5f;
             }
         }
 
         public bool checkCollision(Rectangle Car)
         {
-            Rectangle missleLocation = new Rectangle(
-                (int)position.X,
-                (int)position.Y,
-                texture.Width,
-                texture.Height);
+            int actualWidth = (int)(texture.Width * position.Y / 48);
 
+            Rectangle missleLocation = new Rectangle(
+                (int)(position.X - actualWidth + 30),
+                (int)position.Y,
+                (int)(actualWidth + 1),
+                (int)(actualWidth + 1));
+            Console.WriteLine(missleLocation.Width);
             if (missleLocation.Intersects(Car))
                 return true;
 
@@ -72,9 +74,9 @@ namespace Racer
         {
             //spriteBatch.Draw(texture, position, Color.White); 480
             //spriteBatch.Draw(texture, position, Color.White);
-           /* if (position.Y / 48 > 1)
+            if (position.Y / 48 > 1)
                 spriteBatch.Draw(texture, position, null, Color.White, 1, Vector2.Zero, position.Y / 48, SpriteEffects.None, 0);
-            else */
+            else
                 spriteBatch.Draw(texture, position, Color.White);
         }
         
