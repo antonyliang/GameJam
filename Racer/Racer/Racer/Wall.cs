@@ -39,7 +39,7 @@ namespace Racer
             if (position.Y > screenBounds.Height - 10)
             {
                 StartPosition();
-                if(speed < 15f) 
+                if(speed < 16f) 
                     speed += 0.5f;
             }
         }
