@@ -14,6 +14,7 @@ namespace Racer
         Vector2 position;
         Vector2 motion;
         float multiplier;
+        TimeSpan buffEnd;
 
         Texture2D texture;
         Rectangle screenBounds;
@@ -98,6 +99,15 @@ namespace Racer
         public Texture2D getTexture()
         {
             return texture;
+        }
+
+        public void setBuffEnd(TimeSpan ts)
+        {
+            this.buffEnd = ts;
+        }
+        public TimeSpan getBuffEnd()
+        {
+            return this.buffEnd;
         }
 
         public Rectangle getRectangle()

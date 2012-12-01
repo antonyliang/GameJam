@@ -26,6 +26,7 @@ namespace Racer
         Boolean start;
         GG gameOver;
         Boolean lost;
+        Boolean gotGreen;
         
         powerUp redPow;
         powerUp greenPow;
@@ -34,6 +35,7 @@ namespace Racer
         SpriteFont font;
         string PlayerTime = "Time: ";
         TimeSpan startScreen;
+        TimeSpan ts;
 
         public Game1()
         {
@@ -81,14 +83,14 @@ namespace Racer
             {
                 bricks[i] = new Wall(tempWallTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             }
-            /*
+            
             Texture2D redTexture = Content.Load<Texture2D>("red");
-            redPow = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             Texture2D greenTexture = Content.Load<Texture2D>("green");
-            greenPow = new powerUp(greenTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             Texture2D blueTexture = Content.Load<Texture2D>("blue");
+            redPow = new powerUp(redTexture, screenRectangle, random.Next(0, screenRectangle.Width));
+            greenPow = new powerUp(greenTexture, screenRectangle, random.Next(0, screenRectangle.Width));
             bluePow = new powerUp(blueTexture, screenRectangle, random.Next(0, screenRectangle.Width));
-            */
+            
             Menu = new startMenu(menuTexture);
             gameOver = new GG(ggTexture, lost);
 
@@ -148,14 +150,12 @@ namespace Racer
                     Player.takeDamage();
                     brick.hitPlayer = true;
                 }
+            }
                 if (Player.getShields() <= 0)
                 {
-                    //    gameOver.setLost(true);
-                    //    lost = gameOver.getLost();
+                //    gameOver.setLost(true);
+                //    lost = gameOver.getLost();
                 }
-            }
-                /*
-                       * 
                 if (redPow.checkCollision(Player.getRectangle()))
                 {
                     Console.WriteLine("redPOW");
@@ -165,10 +165,12 @@ namespace Racer
                 }
                 if (greenPow.checkCollision(Player.getRectangle()))//is permanent for now
                 {
-                    Console.WriteLine("greenPOW");
-                    TimeSpan timeToStop = timePlaying.Add(TimeSpan.Parse("0:0:10"));
-                    Player.buffMultiplier(2);//timespan of 10s
+                    //Console.WriteLine("greenPOW");
+                    Player.buffMultiplier(2);//what to set multiplier to
                     greenPow.hitPlayer = true;
+                    this.gotGreen = true;
+                    ts = TimeSpan.FromSeconds(2.0);//how long buff lasts
+                    Player.setBuffEnd(timePlaying.Add(ts));
                     Console.WriteLine("You got a green power up");
                 }
                 if (bluePow.checkCollision(Player.getRectangle()))
@@ -176,7 +178,7 @@ namespace Racer
                     Console.WriteLine("bluePOW");
                     bluePow.hitPlayer = true;
                     Console.WriteLine("You got a blue power up");
-                } */
+                } 
                 //Player.updateScore(gameTime.TotalGameTime);
                 //TimeSpan timePlaying = gameTime.TotalGameTime.Subtract(startScreen);
 
