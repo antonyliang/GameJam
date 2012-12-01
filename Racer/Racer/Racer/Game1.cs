@@ -19,11 +19,14 @@ namespace Racer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Car Player;
+        Rectangle screenRectangle;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -37,7 +40,6 @@ namespace Racer
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            Player = new Car();
         }
 
         /// <summary>
@@ -50,6 +52,9 @@ namespace Racer
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            Texture2D tempTexture = Content.Load<Texture2D>("ball");
+            Player = new Car(tempTexture, screenRectangle);
+
         }
 
         /// <summary>
@@ -74,6 +79,8 @@ namespace Racer
 
             // TODO: Add your update logic here
 
+            Player.Update();
+
             base.Update(gameTime);
         }
 
@@ -86,6 +93,9 @@ namespace Racer
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            Player.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
