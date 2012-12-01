@@ -18,6 +18,7 @@ namespace Racer
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Car Player;
 
         public Game1()
         {
@@ -36,6 +37,7 @@ namespace Racer
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            Player = new Car();
         }
 
         /// <summary>
