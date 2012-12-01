@@ -19,6 +19,7 @@ namespace Racer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Car Player;
+        Wall wall;
         Rectangle screenRectangle;
 
         public Game1()
@@ -53,6 +54,8 @@ namespace Racer
 
             // TODO: use this.Content to load your game content here
             Texture2D tempTexture = Content.Load<Texture2D>("ball");
+            Texture2D tempWallTexture = Content.Load<Texture2D>("paddle");
+
             Player = new Car(tempTexture, screenRectangle);
 
         }
