@@ -26,6 +26,8 @@ namespace Racer
         Boolean start;
         GG gameOver;
         Boolean lost;
+        highScore hScore;
+        Boolean lookHS;
         int score;
 
         powerUp[] powers;
@@ -47,6 +49,7 @@ namespace Racer
         Texture2D redTexture;
         Texture2D greenTexture;
         Texture2D blueTexture;
+        Texture2D hsTexture;
 
         public Game1()
         {
@@ -54,6 +57,7 @@ namespace Racer
             Content.RootDirectory = "Content";
             screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             lost = false;
+            lookHS = false;
         }
 
         /// <summary>
@@ -87,6 +91,7 @@ namespace Racer
             greenTexture = Content.Load<Texture2D>("green");
             blueTexture = Content.Load<Texture2D>("blue");
             explosionTexture = Content.Load<Texture2D>("explosion");
+            hsTexture = Content.Load<Texture2D>("highScores");
 
             GameStart();
 
@@ -113,6 +118,7 @@ namespace Racer
 
             Menu = new startMenu(menuTexture);
             gameOver = new GG(ggTexture, lost);
+            hScore = new highScore(hsTexture);
             start = false;
         }
 
@@ -136,9 +142,25 @@ namespace Racer
             {
                 gameOver.Update();
                 lost = gameOver.getLost();
+                //high score?
+
+                if (hScore.isHighScore(this.score))
+                    hScore.sethighScore(this.score);
+
                 if (!lost)
                     GameStart();
                 return;
+            }
+            if (lookHS)
+            {
+                hScore.seths(true);
+                KeyboardState keyboardState;
+                keyboardState = Keyboard.GetState();
+                if (keyboardState.IsKeyDown(Keys.Back) || keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    hScore.seths(false);
+                    lookHS = false; ;
+                }
             }
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -148,6 +170,13 @@ namespace Racer
             {
                 start = Menu.Update();
                 startScreen = gameTime.TotalGameTime;
+                KeyboardState keyboardState;
+                keyboardState = Keyboard.GetState();
+                if (keyboardState.IsKeyDown(Keys.Space))
+                {
+                    lookHS = true;
+                    //hScore.seths(true);
+                }
             }
             else
             {
@@ -218,6 +247,23 @@ namespace Racer
             spriteBatch.DrawString(font, "Shield Left : " + Player.getShields() , new Vector2(650, 10), Color.White);
             spriteBatch.DrawString(font, "Score : " + score, new Vector2(350, 10), Color.White);
         }
+        private void DrawHS()
+        {
+            //buttons
+            String text1 = "Hit BackSpace to return to the main menu";
+            String text2 = "Hit Enter to start the game";
+            spriteBatch.DrawString(font, text1, new Vector2(500, 50), Color.White);
+            spriteBatch.DrawString(font, text2, new Vector2(500, 80), Color.White);
+            String[] placeValues = { "First Place: ", "Second Place: ", "Third Place: ", "Fourth Place: ", "Fifth Place: " };
+            int hsX = 100;
+            int hsY = 100;
+            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                spriteBatch.DrawString(font, placeValues[i] + lines[i], new Vector2(hsX, hsY), Color.White);
+                hsY += 50;
+            }
+        }
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -245,7 +291,12 @@ namespace Racer
             }
             Menu.Draw(spriteBatch);
             gameOver.Draw(spriteBatch);
+            hScore.Draw(spriteBatch);
             DrawText();
+            if (lookHS)
+            {
+                DrawHS();
+            }
             spriteBatch.End();
             
 

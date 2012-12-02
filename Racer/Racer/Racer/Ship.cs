@@ -27,7 +27,7 @@ namespace Racer
         {
             this.texture = texture;
             this.screenBounds = screenBounds;
-            this.shields = 10;
+            this.shields = 1;// 10
             this.multiplier = 1;
 
             StartPosition();

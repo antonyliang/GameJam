@@ -2,31 +2,13 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>ball.png</Source>
-      <Name>ball</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\ball.xnb</Output>
-      <Time>2012-12-01T00:42:07.5225546-05:00</Time>
-    </Item>
-    <Item>
-      <Source>paddle.png</Source>
-      <Name>paddle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\paddle.xnb</Output>
-      <Time>2012-12-01T01:22:42.7363665-05:00</Time>
-    </Item>
-    <Item>
       <Source>startMenu.png</Source>
       <Name>startMenu</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\startMenu.xnb</Output>
-      <Time>2012-12-01T00:42:07.5455559-05:00</Time>
+      <Time>2012-12-01T18:12:32.8212739-05:00</Time>
     </Item>
     <Item>
       <Source>ggscreen.png</Source>
@@ -35,7 +17,88 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\ggscreen.xnb</Output>
-      <Time>2012-12-01T01:27:00.1570901-05:00</Time>
+      <Time>2012-12-01T18:12:32.7744738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>blue.png</Source>
+      <Name>blue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\blue.xnb</Output>
+      <Time>2012-12-01T18:12:32.7744738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>green.png</Source>
+      <Name>green</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\green.xnb</Output>
+      <Time>2012-12-01T18:12:32.7744738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>red.png</Source>
+      <Name>red</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\red.xnb</Output>
+      <Time>2012-12-01T18:12:32.8212739-05:00</Time>
+    </Item>
+    <Item>
+      <Source>jet.png</Source>
+      <Name>jet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\jet.xnb</Output>
+      <Time>2012-12-01T18:12:32.7900738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>missile.png</Source>
+      <Name>missile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\missile.xnb</Output>
+      <Time>2012-12-01T18:12:32.7900738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>bluesky.png</Source>
+      <Name>bluesky</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\bluesky.xnb</Output>
+      <Time>2012-12-01T18:12:32.7744738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>explosion.png</Source>
+      <Name>explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\explosion.xnb</Output>
+      <Time>2012-12-01T18:12:32.7744738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>myFont.spritefont</Source>
+      <Name>myFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\myFont.xnb</Output>
+      <Time>2012-12-01T18:13:58.5765738-05:00</Time>
+    </Item>
+    <Item>
+      <Source>highScores.png</Source>
+      <Name>highScores</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\highScores.xnb</Output>
+      <Time>2012-12-01T18:07:26.5674334-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
