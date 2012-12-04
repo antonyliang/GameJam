@@ -15,13 +15,15 @@ namespace Racer
         Texture2D texture;
         Boolean hs;
         string[] lines;
-
+        //string directory = @"C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt";
+        string directory = @"C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt";
+        
         public highScore(Texture2D texture){
             this.texture = texture;
             this.hs = false;
             this.position.Y = 0;
             this.position.X = 0;
-            this.lines = System.IO.File.ReadAllLines(@"C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt");
+            this.lines = System.IO.File.ReadAllLines(directory);
         }
         public void seths(Boolean b)
         {
@@ -31,33 +33,44 @@ namespace Racer
         {
             return hs;
         }
-        public void sethighScore(int score){
-            //some
-        }
-
-        public int getHighScore()
+        public string[] getHighScore()
         {
-            return 1;
+            return this.lines;
         }
         public void isHighScore(int score)
         {
-            this.lines = System.IO.File.ReadAllLines(@"C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt");
-            int[] hsArray = new int[lines.Length];
+            int[] hsArray = new int[this.lines.Length];
             int temp = score;
-            for (int i = 0; i < lines.Length; i++)
+            //copy lines into hsArray (string[] to int[])
+            for (int i = 0; i < this.lines.Length; i++)
             {
                 int.TryParse(this.lines[i], out hsArray[i]);
             }
-            for (int i = 0; i < lines.Length; i++)
+            //see if current score is a high score and if it is add it to hsArray
+            for (int i = 0; i < this.lines.Length; i++)
             {
                 if (temp > hsArray[i])
                 {
-                    temp = hsArray[i];
-                    hsArray[i] = score;
+                    int placeholder = hsArray[i];
+                    hsArray[i] = temp;
+                    temp = placeholder;
                 }
             }
-            //write hsArray(new highscore array)
-            System.IO.File.WriteAllLines(@":\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt", lines);
+            //convert hsArray from int[] to string[] for writing
+            string[] stringHSArray = new string[this.lines.Length];
+            for (int i = 0; i < stringHSArray.Length; i++)
+            {
+                stringHSArray[i] = hsArray[i].ToString();
+            }
+
+            System.IO.File.WriteAllLines(directory, stringHSArray);
+        }
+        public void clearHS()
+        {
+            for (int i = 0; i < this.lines.Length; i++)
+            {
+                this.lines[i] = "0";
+            }
         }
         public void Update()
         {

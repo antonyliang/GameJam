@@ -1,2 +1,3 @@
 C:\Users\Stanley\Documents\GitHub\GameJam\Racer\Racer\RacerContent\obj\x86\Debug\RacerContent.contentprojResolveAssemblyReference.cache
 C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\obj\x86\Debug\RacerContent.contentprojResolveAssemblyReference.cache
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\RacerContent\obj\x86\Debug\ResolveAssemblyReference.cache

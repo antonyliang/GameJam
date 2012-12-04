@@ -1,4 +1,4 @@
-Content\startMenu.xnb
+Content\startmenu.xnb
 Content\ggscreen.xnb
 Content\blue.xnb
 Content\green.xnb
@@ -7,5 +7,5 @@ Content\jet.xnb
 Content\missile.xnb
 Content\bluesky.xnb
 Content\explosion.xnb
-Content\myFont.xnb
 Content\highScores.xnb
+Content\myFont.xnb

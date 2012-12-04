@@ -170,6 +170,10 @@ namespace Racer
                     hScore.seths(false);
                     lookHS = false; ;
                 }
+                if (keyboardState.IsKeyDown(Keys.C))
+                {
+                    hScore.clearHS();
+                }
             }
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -261,15 +265,16 @@ namespace Racer
             //buttons
             String text1 = "Hit BackSpace to return to the main menu";
             String text2 = "Hit Enter to start the game";
+            String text3 = "Hit 'C' to clear all high scores";
             spriteBatch.DrawString(font, text1, new Vector2(500, 50), Color.White);
             spriteBatch.DrawString(font, text2, new Vector2(500, 80), Color.White);
+            spriteBatch.DrawString(font, text3, new Vector2(500, 110), Color.White);
             String[] placeValues = { "First Place: ", "Second Place: ", "Third Place: ", "Fourth Place: ", "Fifth Place: " };
             int hsX = 100;
             int hsY = 100;
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt");
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < this.hScore.getHighScore().Length; i++)
             {
-                spriteBatch.DrawString(font, placeValues[i] + lines[i], new Vector2(hsX, hsY), Color.White);
+                spriteBatch.DrawString(font, placeValues[i] + this.hScore.getHighScore()[i], new Vector2(hsX, hsY), Color.White);
                 hsY += 50;
             }
         }

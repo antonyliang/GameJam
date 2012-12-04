@@ -19,3 +19,24 @@ C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.a
 C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.exe
 C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.pdb
 C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\highScores.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\startmenu.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\ggscreen.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\blue.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\green.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\red.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\jet.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\missile.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\bluesky.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\explosion.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\highScores.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Content\myFont.xnb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Racer.exe.manifest
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Racer.application
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Racer.exe
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\bin\x86\Debug\Racer.pdb
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.exe.manifest
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.application
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.exe
+C:\Users\Marist User\Documents\GitHub\GameJam\Racer\Racer\Racer\obj\x86\Debug\Racer.pdb
