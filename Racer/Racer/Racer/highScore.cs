@@ -39,8 +39,25 @@ namespace Racer
         {
             return 1;
         }
-        public Boolean isHighScore(int score)
+        public void isHighScore(int score)
         {
+            this.lines = System.IO.File.ReadAllLines(@"C:\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt");
+            int[] hsArray = new int[lines.Length];
+            int temp = score;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                int.TryParse(this.lines[i], out hsArray[i]);
+            }
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (temp > hsArray[i])
+                {
+                    temp = hsArray[i];
+                    hsArray[i] = score;
+                }
+            }
+            //write hsArray(new highscore array)
+            System.IO.File.WriteAllLines(@":\Users\Antony\Documents\GitHub\GameJam\Racer\Racer\RacerContent\highScores.txt", lines);
         }
         public void Update()
         {

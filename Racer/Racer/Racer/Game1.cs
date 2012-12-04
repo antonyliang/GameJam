@@ -143,10 +143,19 @@ namespace Racer
                 gameOver.Update();
                 lost = gameOver.getLost();
                 //high score?
-
+                /*
                 if (hScore.isHighScore(this.score))
                     hScore.sethighScore(this.score);
-
+                 */
+                hScore.isHighScore(this.score);
+                KeyboardState keyboardState;
+                keyboardState = Keyboard.GetState();
+                if (keyboardState.IsKeyDown(Keys.Back))
+                {
+                    lost = false;
+                    start = false;
+                }
+                //lookHS = true;
                 if (!lost)
                     GameStart();
                 return;
